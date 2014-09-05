@@ -21,40 +21,41 @@ public class AndroidNetworkEnabler extends CordovaPlugin implements Runnable {
 	private ScheduledExecutorService scheduledExecutorService = null;
 
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+		Log.e(LOG_TAG, "In initialize method");
 		super.initialize(cordova, webView);
-		Log.i(LOG_TAG, "In initialize method");
 		schedule();
 	}
 	
 	@Override
 	public void onDestroy() {
-		Log.i(LOG_TAG, "In onDestroy method");
+		Log.d(LOG_TAG, "In onDestroy method");
 		unschedule();
 		super.onDestroy();
 	}
 
 	@Override
 	public void run() {
-		Log.i(LOG_TAG, "In run method");
+		Log.d(LOG_TAG, "In run method");
 		ConnectivityManager connManager = (ConnectivityManager) webView
 				.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo current = connManager.getActiveNetworkInfo();
 
 		if (current != null && current.isConnectedOrConnecting()) {
-			Log.i(LOG_TAG, "There is an active connection");
+			Log.d(LOG_TAG, "There is an active connection");
 			return;
 		}
 
 		WifiManager wifiManager = (WifiManager) webView.getContext()
 				.getSystemService(Context.WIFI_SERVICE);
 		if (!wifiManager.isWifiEnabled()) {
-			Log.i(LOG_TAG, "Enabling Wifi");
+			Log.d(LOG_TAG, "Enabling Wifi");
 			boolean success = wifiManager.setWifiEnabled(true);
-			Log.i(LOG_TAG, "Enable Wifi returns: " + success);
+			Log.d(LOG_TAG, "Enable Wifi returns: " + success);
 		}
 	}
 
 	public void schedule() {
+		Log.d(LOG_TAG, "In schedule method");
 		unschedule();
 
 		synchronized (syncObj) {
@@ -66,6 +67,7 @@ public class AndroidNetworkEnabler extends CordovaPlugin implements Runnable {
 	}
 
 	public void unschedule() {
+		Log.d(LOG_TAG, "In unschedule method");
 		synchronized (syncObj) {
 			if (scheduledExecutorService != null) {
 				ScheduledExecutorService exeSvc = scheduledExecutorService;
