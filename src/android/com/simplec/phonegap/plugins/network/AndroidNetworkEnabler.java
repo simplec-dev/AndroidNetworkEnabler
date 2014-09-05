@@ -45,13 +45,15 @@ public class AndroidNetworkEnabler extends CordovaPlugin implements Runnable {
 			return;
 		}
 
-		WifiManager wifiManager = (WifiManager) webView.getContext()
-				.getSystemService(Context.WIFI_SERVICE);
+		WifiManager wifiManager = (WifiManager) webView.getContext().getSystemService(Context.WIFI_SERVICE);
 		if (!wifiManager.isWifiEnabled()) {
 			Log.d(LOG_TAG, "Enabling Wifi");
 			boolean success = wifiManager.setWifiEnabled(true);
 			Log.d(LOG_TAG, "Enable Wifi returns: " + success);
+		} else {
+			Log.d(LOG_TAG, "Wifi Enabled");
 		}
+	
 	}
 
 	public void schedule() {
