@@ -32,7 +32,7 @@
         </config-file>
         
  
-     <config-file target="AndroidManifest.xml" target="/*/application/activity/intent-filter"> 
+     <config-file target="AndroidManifest.xml" parent="/*/application/activity/intent-filter"> 
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.HOME"/>
             <category android:name="android.intent.category.DEFAULT" />
