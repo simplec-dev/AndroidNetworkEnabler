@@ -13,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
+import android.view.View;
 
 public class AndroidNetworkEnabler extends CordovaPlugin implements Runnable {
 
